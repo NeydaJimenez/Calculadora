@@ -5,44 +5,81 @@ app = Flask(__name__)
 @app.route('/sumar/<int:num1>/<int:num2>')
 def sumar(num1, num2):
     resultado = num1 + num2
-    return render_template_string(
-        titulo="Resultado de la Suma",
-        mensaje=f"La suma de {num1} + {num2} = {resultado}",
-        maximo=max(num1, num2),
-        minimo=min(num1, num2)
-    )
+    return render_template_string('''
+        <h2>{{ titulo }}</h2>
+        <p>{{ mensaje }}</p>
+        <p>Máximo: {{ maximo }}</p>
+        <p>Mínimo: {{ minimo }}</p>
+        <hr>
+        <footer><strong>Neyda Nahomi Jiménez Martínez - 5°D</strong></footer>
+    ''', titulo="Resultado de la Suma",
+            mensaje=f"La suma de {num1} + {num2} = {resultado}",
+            maximo=max(num1, num2),
+            minimo=min(num1, num2))
 
 @app.route('/restar/<int:num1>/<int:num2>')
 def restar(num1, num2):
     resultado = num1 - num2
-    return render_template_string(
-        titulo="Resultado de la Resta",
-        mensaje=f"La resta de {num1} - {num2} = {resultado}",
-        maximo=max(num1, num2),
-        minimo=min(num1, num2)
-    )
+    return render_template_string('''
+        <h2>{{ titulo }}</h2>
+        <p>{{ mensaje }}</p>
+        <p>Máximo: {{ maximo }}</p>
+        <p>Mínimo: {{ minimo }}</p>
+        <hr>
+        <footer><strong>Neyda Nahomi Jiménez Martínez - 5°D</strong></footer>
+    ''', titulo="Resultado de la Resta",
+            mensaje=f"La resta de {num1} - {num2} = {resultado}",
+            maximo=max(num1, num2),
+            minimo=min(num1, num2))
 
 @app.route('/multi/<int:num1>/<int:num2>')
 def multiplicar(num1, num2):
     resultado = num1 * num2
-    return render_template_string(
-        titulo="Resultado de la Multiplicación",
-        mensaje=f"La multiplicación de {num1} x {num2} = {resultado}",
-        maximo=max(num1, num2),
-        minimo=min(num1, num2)
-    )
+    return render_template_string('''
+        <h2>{{ titulo }}</h2>
+        <p>{{ mensaje }}</p>
+        <p>Máximo: {{ maximo }}</p>
+        <p>Mínimo: {{ minimo }}</p>
+        <hr>
+        <footer><strong>Neyda Nahomi Jiménez Martínez - 5°D</strong></footer>
+    ''', titulo="Resultado de la Multiplicación",
+            mensaje=f"La multiplicación de {num1} x {num2} = {resultado}",
+            maximo=max(num1, num2),
+            minimo=min(num1, num2))
 
 @app.route('/div/<int:num1>/<int:num2>')
 def dividir(num1, num2):
     if num2 == 0:
-        return "<h2>Error: No se puede dividir por cero.</h2><hr><footer><strong>Neyda Nahomi Jiménez Martínez 5-D</strong></footer>"
+        return "<h2>Error: No se puede dividir por cero.</h2><hr><footer><strong>Neyda Nahomi Jiménez Martínez - 5°D</strong></footer>"
     resultado = num1 / num2
-    return render_template_string(
-        titulo="Resultado de la División",
-        mensaje=f"La división de {num1} ÷ {num2} = {resultado}",
-        maximo=max(num1, num2),
-        minimo=min(num1, num2)
-    )
+    return render_template_string('''
+        <h2>{{ titulo }}</h2>
+        <p>{{ mensaje }}</p>
+        <p>Máximo: {{ maximo }}</p>
+        <p>Mínimo: {{ minimo }}</p>
+        <hr>
+        <footer><strong>Neyda Nahomi Jiménez Martínez - 5°D</strong></footer>
+    ''', titulo="Resultado de la División",
+            mensaje=f"La división de {num1} ÷ {num2} = {resultado}",
+            maximo=max(num1, num2),
+            minimo=min(num1, num2))
+
+@app.route('/fac/<int:num>')
+def factorial(num):
+    if num < 0:
+        return "<h2>Error: No se puede calcular el factorial de un número negativo.</h2><hr><footer><strong>Neyda Nahomi Jiménez Martínez - 5°D</strong></footer>"
+    
+    resultado = 1
+    for i in range(1, num + 1):
+        resultado *= i
+
+    return render_template_string('''
+        <h2>{{ titulo }}</h2>
+        <p>{{ mensaje }}</p>
+        <hr>
+        <footer><strong>Neyda Nahomi Jiménez Martínez - 5°D</strong></footer>
+    ''', titulo="Resultado del Factorial",
+            mensaje=f"El factorial de {num} es {resultado}")
 
 @app.route('/')
 def index():
@@ -54,10 +91,11 @@ def index():
             <li><a href="/restar/10/20">Restar 10 - 20</a></li>
             <li><a href="/multi/10/20">Multiplicar 10 x 20</a></li>
             <li><a href="/div/10/20">Dividir 10 ÷ 20</a></li>
+            <li><a href="/fac/5">Factorial de 5</a></li>
         </ul>
         <hr> 
         <footer>
-           Neyda Nahomi Jiménez Martínez - 5°D 
+            <strong>Neyda Nahomi Jiménez Martínez - 5°D</strong>
         </footer>
     '''
 
